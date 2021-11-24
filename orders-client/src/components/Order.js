@@ -16,5 +16,4 @@ const Order = ({order}) => {
       </div>       
     );
 }
-
 export default Order;

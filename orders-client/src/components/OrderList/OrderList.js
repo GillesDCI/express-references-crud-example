@@ -68,7 +68,7 @@ const OrderList = () => {
          
         </div>
      
-               <div className="flex-grid">
+         <div className="flex-grid">
 
             {orders.map((order, index)=> {
               return (

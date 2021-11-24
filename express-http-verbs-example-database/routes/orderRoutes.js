@@ -11,8 +11,8 @@ router.get('/', async (req,res) => {
 router.get('/paging/:skip/:limit', async (req, res) => {
     const orders = await Order.find({})
     .populate('user')
-    .skip(Number(req.params.skip))
-    .limit(Number(req.params.limit))
+    .skip(Number(req.params.skip)) //skip this many documents.
+    .limit(Number(req.params.limit)) //limit the amount of documents to this limit.
     
     return res.status(200).json(orders);
 });
@@ -37,13 +37,13 @@ router.get('/paging', async(req, res) => {
     return res.status(200).json(orders);
 });
 
-
+//Get the order by userID
 router.get('/byuser/:userid', async(req, res) => {
     const orders = await Order.find({user:req.params.userid})
     res.status(200).json(orders);
 });
 
-//using POST
+//Create a new order 
 router.post('/add',async (req, res) => {
     try {
         const resultOrder =  await Order.create({
@@ -51,7 +51,7 @@ router.post('/add',async (req, res) => {
             totalPrice:req.body.totalPrice,
             vat:req.body.vat,
             totalPriceInclVat: req.body.totalPriceInclVat,
-            user: req.body.userID
+            user: req.body.userID //we post the user ID this is a reference to the user document that's connected to this order.
         })
 
         return res.status(200).json({message:'Order was created', createdOrder:resultOrder})
@@ -60,6 +60,5 @@ router.post('/add',async (req, res) => {
     }
 
 });
-
 
 module.exports = router;

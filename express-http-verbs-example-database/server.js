@@ -8,6 +8,7 @@ const app = express();
 
 //allow us to send json information to the server. 
 app.use(express.json());
+//setting up cors
 app.use(cors());
 
 mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}/${process.env.DB_NAME}?retryWrites=true&w=majority`
@@ -22,7 +23,7 @@ const teaRoutes = require('./routes/teaRoutes');
 const userRoutes = require('./routes/userRoutes');
 const orderRoutes = require('./routes/orderRoutes');
 
-
+//register routes
 app.use('/api/teas', teaRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/orders', orderRoutes);
